@@ -7,5 +7,32 @@
         android:id="@+id/book_database"
         android:text="Create database"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/book_add_data"
+        android:text="Add data"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/book_update"
+        android:text="Update"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/book_delete"
+        android:text="Delete"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/book_query"
+        android:text="Query"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/book_text"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="#000"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

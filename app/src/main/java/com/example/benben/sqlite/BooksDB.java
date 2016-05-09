@@ -38,10 +38,16 @@ public class BooksDB extends SQLiteOpenHelper {
         db.execSQL(CREATE_BOOK);
         Toast.makeText(mContext,"Create succeeded",Toast.LENGTH_LONG).show();
         Log.i(TAG, "Create succeeded ");
+        Log.i(TAG, "创建|打开 ");
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("drop table if exists Book");
+        db.execSQL("drop table if exists Category");
+        onCreate(db);
+        Log.i(TAG, "跟新 ");
 
     }
 }
