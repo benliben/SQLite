@@ -24,7 +24,6 @@ public class BookActivity extends AppCompatActivity {
     private BooksDB dbHelper;
 
 
-
     @InjectView(R.id.book_add_data)
     Button mDatabase;
     @InjectView(R.id.book_text)
@@ -45,7 +44,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.book_database, R.id.book_add_data, R.id.book_update, R.id.book_delete
-            , R.id.book_query})
+            , R.id.book_query, R.id.book_replace_data})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.book_database:
@@ -130,14 +129,43 @@ public class BookActivity extends AppCompatActivity {
                         Log.i(TAG, "书的价格是" + price);
 
                         mContent.setText("书的名字是" + name
-                                +"书的作者是" + author
-                                +"书的页数是" + pages
-                                +"书的价格是" + price);
+                                + "书的作者是" + author
+                                + "书的页数是" + pages
+                                + "书的价格是" + price);
 
                     } while (cursor.moveToNext());
                     cursor.close();
                 }
                 break;
-        }
+
+            /**
+             * 事物的处理，只有当整件事情完成的时候才会让事物成功，否则是失败
+             */
+            case R.id.book_replace_data:
+                SQLiteDatabase db5 = dbHelper.getWritableDatabase();
+                db5.beginTransaction();//开启事物
+                db5.delete("Book", null, null);
+
+//                try {
+//                    if (true) {
+//                        //这里手动抛出异常，让事物失败
+//                        throw new NullPointerException();
+//                    }
+                    ContentValues values2 = new ContentValues();
+                    values2.put("name", "Game of Thrones");
+                    values2.put("author", "George Martin");
+                    values2.put("pages", 720);
+                    values2.put("price", 20.85);
+                    db5.insert("Book", null, values2);
+                    db5.setTransactionSuccessful();//事物执行已经执行成功
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                finally {
+                db5.endTransaction();//结束事物
+
+//        }
+        break;
     }
+}
 }
